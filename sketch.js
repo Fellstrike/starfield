@@ -155,16 +155,19 @@ if ((eventTimer % eventRate) == 0)
   if (redAlert)
   {
     fill(255, 255, 255);
+    text("Red Alert!", width/2, height/3);
     text("Click Mouse!", width/2, height/2);
   }
   if (yellowAlert)
   {
     fill(255, 255, 255);
+    text("Yellow Alert!", width/2, height/3);
     text("Press Y!", width/2, height/2);
   }
   if (greenAlert)
   {
     fill(255, 255, 255);
+    text("Green Alert?", width/2, height/3);
     text("Press G!", width/2, height/2);
   }
 }
