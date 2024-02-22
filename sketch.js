@@ -4,7 +4,6 @@ let maxAsteroids = 50;
 let stars = [];
 let maxStars = 100;
 let hyperspaceJump = false;
-let spaceFXRotate = 45;
 
 let eventTimer = 1;
 let eventRate = 60;
@@ -65,7 +64,7 @@ function draw()
       stars[s].changeSpeed();
       stars[s].changeHeight(2);
       stars[s].changeColor(225, 225, 255);
- 
+
       //spaceFXRotate += spaceFXRotate;
       if (stars[s].isDead())
       {
@@ -80,8 +79,11 @@ function draw()
     resetEvent();
     hyperspaceJump = false;
     spaceFXRotate = 45;
+    asteroids.splice(0, asteroids.length);
+    ship = 0;
+    shipSpawned = false;
   }
-  if(!hyperspaceJump)
+  if (!hyperspaceJump)
   {
     for(let a = 0; a < asteroids.length; a++)
     {
@@ -119,62 +121,62 @@ function draw()
     vertex(3 * width / 4, height-1);
   endShape(CLOSE);
   beginShape(triangle);
-  vertex(1, height / 2);
-  vertex(1, 1);
-  vertex(width / 4, 1);
-endShape(CLOSE);
-beginShape(triangle);
-  vertex(width - 1, height / 2);
-  vertex(width - 1, 1);
-  vertex(3 * width / 4, 1);
-endShape(CLOSE);
-pop();
+    vertex(1, height / 2);
+    vertex(1, 1);
+    vertex(width / 4, 1);
+  endShape(CLOSE);
+  beginShape(triangle);
+    vertex(width - 1, height / 2);
+    vertex(width - 1, 1);
+    vertex(3 * width / 4, 1);
+  endShape(CLOSE);
+  pop();
 
-if (redAlert && lightFlash)
-{
-  //ambientLight(lightColor);
-  winFill = lerpColor(winFill, color(255, 100, 100), 0.5);
-}
-else if (yellowAlert && lightFlash)
-{
-  winFill = lerpColor(winFill, color(255, 204, 0), 0.5);
-}
-else if (greenAlert && lightFlash)
-{
-  winFill = lerpColor(winFill, color(0, 255, 0), 0.5);
-}
-else
-{
-  winFill = lerpColor(winFill, color(25, 25, 25), 0.5);
-}
+  if (redAlert && lightFlash)
+  {
+    //ambientLight(lightColor);
+    winFill = lerpColor(winFill, color(255, 100, 100), 0.5);
+  }
+  else if (yellowAlert && lightFlash)
+  {
+    winFill = lerpColor(winFill, color(255, 204, 0), 0.5);
+  }
+  else if (greenAlert && lightFlash)
+  {
+    winFill = lerpColor(winFill, color(0, 255, 0), 0.5);
+  }
+  else
+  {
+    winFill = lerpColor(winFill, color(25, 25, 25), 0.5);
+  }
 
-if ((eventTimer % eventRate) == 0)
-{
-  textSize(20);
-  eventHandling();
-  if (redAlert)
+  if ((eventTimer % eventRate) == 0)
   {
-    fill(255, 255, 255);
-    text("Red Alert!", width/2, height/3);
-    text("Click Mouse!", width/2, height/2);
+    textSize(20);
+    eventHandling();
+    if (redAlert)
+    {
+      fill(255, 255, 255);
+      text("Red Alert!", width/2, height/3);
+      text("Click Mouse!", width/2, height/2);
+    }
+    if (yellowAlert)
+    {
+      fill(255, 255, 255);
+      text("Yellow Alert!", width/2, height/3);
+      text("Press Y!", width/2, height/2);
+    }
+    if (greenAlert)
+    {
+      fill(255, 255, 255);
+      text("Green Alert?", width/2, height/3);
+      text("Press G!", width/2, height/2);
+    }
   }
-  if (yellowAlert)
+  else
   {
-    fill(255, 255, 255);
-    text("Yellow Alert!", width/2, height/3);
-    text("Press Y!", width/2, height/2);
+    eventTimer++;
   }
-  if (greenAlert)
-  {
-    fill(255, 255, 255);
-    text("Green Alert?", width/2, height/3);
-    text("Press G!", width/2, height/2);
-  }
-}
-else
-{
-  eventTimer++;
-}
 }
 
 function asteroidSpawner()
