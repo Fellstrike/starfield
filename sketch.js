@@ -81,24 +81,26 @@ function draw()
     hyperspaceJump = false;
     spaceFXRotate = 45;
   }
-
-  for(let a = 0; a < asteroids.length; a++)
+  if(!hyperspaceJump)
   {
-    asteroids[a].display();
-    asteroids[a].movement();
-    if(asteroids[a].isDead())
+    for(let a = 0; a < asteroids.length; a++)
     {
-      asteroids.splice(a, 1);
+      asteroids[a].display();
+      asteroids[a].movement();
+      if(asteroids[a].isDead())
+      {
+        asteroids.splice(a, 1);
+      }
     }
-  }
-  if (shipSpawned)
-  {
-    ship.display();
-    ship.movement();
-    if (ship.isDead())
+    if (shipSpawned)
     {
-      ship = 0;
-      shipSpawned = false;
+      ship.display();
+      ship.movement();
+      if (ship.isDead())
+      {
+        ship = 0;
+        shipSpawned = false;
+      }
     }
   }
 
@@ -148,9 +150,23 @@ else
 
 if ((eventTimer % eventRate) == 0)
 {
-  fill(125, 125, 255);
-  text("Event Happened", width/2, height/2);
+  textSize(20);
   eventHandling();
+  if (redAlert)
+  {
+    fill(255, 255, 255);
+    text("Click Mouse!", width/2, height/2);
+  }
+  if (yellowAlert)
+  {
+    fill(255, 255, 255);
+    text("Press Y!", width/2, height/2);
+  }
+  if (greenAlert)
+  {
+    fill(255, 255, 255);
+    text("Press G!", width/2, height/2);
+  }
 }
 else
 {
