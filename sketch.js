@@ -7,7 +7,7 @@ let hyperspaceJump = false;
 
 let eventTimer = 1;
 let eventRate = 60;
-let eventNum = 7; //around half should be asteroid or other visual spawn.
+let eventNum = 10; //around half should be asteroid or other visual spawn.
 let eventSelector = 0;
 
 let lightColor = 0;
@@ -197,20 +197,23 @@ function eventHandling()
   switch (eventSelector)
   {
     case 1:
+    case 2:
       if (!shipSpawned)
       {
       shipSpawner();
       }
       resetEvent();
       break;
-    case 2:
+    case 3:
       hyperspaceJump = true;
       break;
-    case 3:
+    case 4:
+    case 5:
+    case 6:
       asteroidSpawner();
       resetEvent();
       break;
-    case 4:
+    case 7:
       lightTimer++;
       greenAlert = true;
       //play Green Alert sound
@@ -220,7 +223,7 @@ function eventHandling()
         lightFlash = !lightFlash;
       }
       break;
-    case 5:
+    case 8:
       lightTimer++;
       redAlert = true;
       //play red alert sound
@@ -230,7 +233,7 @@ function eventHandling()
         lightFlash = !lightFlash;
       }
       break;
-    case 6:
+    case 9:
       lightTimer++;
       yellowAlert = true;
       //play yellow alert sound
@@ -317,7 +320,7 @@ class Particle
       imageMode(CENTER);
       translate(this.position.x, this.position.y)
       rotate(this.speed.heading() + 90);
-      console.log(this.speed.heading());
+      //console.log(this.speed.heading());
       image(this.pImage, 0, 0, this.pWidth, this.pHeight);
       pop();
     }
